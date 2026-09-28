@@ -1,0 +1,1132 @@
+/* Camada compartilhada de responsividade. Desktop acima de 1024px permanece no layout de 1102px. */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+img, video, iframe, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+table img[width="20"],
+table img[height="20"],
+table img[width="16"],
+table img[height="16"],
+table img[width="24"],
+table img[height="24"] {
+    width: 20px;
+    height: 20px;
+    max-width: 20px;
+}
+
+#cont {
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+.table-responsive,
+.cmp-table-wrap {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.menu-toggle:hover,
+.menu-toggle:active {
+    transform: none;
+    background: #191970;
+    color: #F5FFFA;
+}
+
+.menu-toggle {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 0;
+    background: #191970;
+    color: #F5FFFA;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.menu-toggle-barras {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 22px;
+}
+
+.menu-toggle-barras span {
+    display: block;
+    height: 2px;
+    background: #F5FFFA;
+}
+
+.submenu-toggle {
+    display: none;
+    float: right;
+    min-width: 44px;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #F5FFFA;
+    font-size: 18px;
+    line-height: 1;
+    box-shadow: none;
+}
+
+.submenu-toggle:hover,
+.submenu-toggle:active {
+    transform: none;
+    background: #FFC001;
+    color: #333;
+}
+
+@media (max-width: 1024px) {
+    html, body {
+        max-width: 100%;
+    }
+
+    body {
+        background: #eef0f7;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        color: #1c1c28;
+        line-height: 1.5;
+    }
+
+    #page-container,
+    #topo,
+    .menu,
+    #conteudo,
+    #rodape {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+        float: none;
+    }
+
+    #topo {
+        height: auto;
+        min-height: 0;
+        border: 0;
+        border-bottom: 3px solid #FC0;
+        box-shadow: 0 1px 0 rgba(25, 25, 112, 0.06);
+    }
+
+    #logo {
+        float: none !important;
+        width: auto;
+        max-width: calc(100% - 24px);
+        height: auto;
+        margin: 8px 12px;
+        box-sizing: border-box;
+    }
+
+    #logo img {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .menu {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+    }
+
+    .menu-toggle {
+        display: flex;
+        gap: 12px;
+        min-height: 48px;
+        padding: 12px 16px;
+        background: #191970;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        box-shadow: 0 4px 14px rgba(25, 25, 112, 0.25);
+    }
+
+    .menu-toggle-barras span {
+        height: 2px;
+        border-radius: 2px;
+    }
+
+    #menu {
+        display: none;
+        float: none;
+        width: 100%;
+        clear: both;
+        background: #fff;
+        box-shadow: 0 12px 28px rgba(20, 24, 60, 0.16);
+        max-height: calc(100vh - 64px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #menu.menu-aberto {
+        display: block;
+    }
+
+    #menu > li {
+        float: none;
+        position: relative;
+        width: 100%;
+        clear: both;
+        border-top: 1px solid #eceef5;
+        background: #fff;
+    }
+
+    #menu a {
+        float: none;
+        width: auto;
+        display: block;
+        padding: 14px 56px 14px 16px;
+        background: #fff;
+        color: #1c1c28;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    #menu a:hover,
+    #menu li.submenu-aberto > a {
+        background: #f4f6ff;
+        color: #191970;
+    }
+
+    #menu li ul {
+        position: static;
+        float: none;
+        width: 100%;
+        display: none;
+        background: #f7f8fc;
+    }
+
+    #menu li:hover > ul,
+    #menu li:hover ul,
+    .menu li.over ul {
+        display: none;
+    }
+
+    #menu li.submenu-aberto > ul {
+        display: block;
+    }
+
+    #menu li ul li {
+        float: none;
+        width: 100%;
+        border-top: 1px solid #eceef5;
+    }
+
+    #menu li ul a {
+        background: #f7f8fc;
+        color: #191970;
+        font-weight: 500;
+        padding: 13px 16px 13px 28px;
+    }
+
+    .submenu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        width: 48px;
+        color: #191970;
+        background: transparent;
+        font-size: 16px;
+    }
+
+    #menu li.submenu-aberto > .submenu-toggle {
+        transform: rotate(180deg);
+        background: transparent;
+        color: #191970;
+    }
+
+    #conteudo {
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    #cont {
+        width: auto;
+        max-width: calc(100% - 16px);
+        margin: 8px;
+        padding: 16px 14px 20px;
+        background: #fff;
+        border: 0;
+        border-radius: 14px;
+        box-shadow: 0 8px 24px rgba(25, 25, 112, 0.08);
+        box-sizing: border-box;
+        font-size: 16px;
+        overflow-wrap: break-word;
+    }
+
+    #cont h2,
+    #cont h3 {
+        color: #191970;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+    }
+
+    #cont h2 {
+        font-size: 1.35rem;
+        margin: 0 0 8px;
+    }
+
+    #cont hr {
+        border: 0;
+        border-top: 1px solid #e6e8f2;
+        margin: 12px 0 16px;
+    }
+
+    #rodape {
+        height: auto;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 8px;
+        padding: 14px 12px;
+        line-height: 1.45;
+        border: 0;
+        border-top: 3px solid #FC0;
+        background: #fff;
+    }
+
+    .table-responsive:has(.rv-card-table) {
+        overflow-x: visible;
+    }
+
+    .rv-card-table {
+        width: 100% !important;
+        border: 0 !important;
+        background: transparent;
+    }
+
+    .rv-card-table tr.rv-card-head {
+        display: none;
+    }
+
+    .rv-card-table tbody tr {
+        display: block;
+    }
+
+    .rv-card-table,
+    .rv-card-table tbody {
+        display: block;
+        width: 100%;
+    }
+
+    .rv-card-table tr {
+        display: block;
+        width: auto;
+        margin: 0 0 12px;
+        padding: 8px 12px;
+        background: #fff;
+        border: 1px solid #e4e7f2;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(25, 25, 112, 0.05);
+    }
+
+    .rv-card-table td {
+        display: grid;
+        grid-template-columns: minmax(7.5rem, 42%) minmax(0, 1fr);
+        column-gap: 12px;
+        row-gap: 2px;
+        align-items: start;
+        width: auto !important;
+        min-width: 0;
+        padding: 8px 0 !important;
+        border: 0 !important;
+        border-bottom: 1px solid #f0f1f6 !important;
+        text-align: left !important;
+        background: transparent !important;
+        font-size: 14px;
+        line-height: 1.35;
+        white-space: normal;
+        overflow: visible;
+    }
+
+    .rv-card-table td:last-child {
+        border-bottom: 0 !important;
+    }
+
+    .rv-card-table td::before {
+        content: attr(data-label);
+        grid-column: 1;
+        grid-row: 1;
+        min-width: 0;
+        color: #191970;
+        font-weight: 700;
+        text-align: left;
+        font-size: 13px;
+        line-height: 1.35;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .rv-card-table td font,
+    .rv-card-table td b {
+        display: block !important;
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+        width: auto !important;
+        max-width: 100%;
+        margin: 0 !important;
+        color: #1c1c28 !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        line-height: 1.35 !important;
+        text-align: right !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+    }
+
+    .rv-card-table td.rv-card-full {
+        display: block;
+        text-align: center !important;
+        color: #555;
+    }
+
+    .rv-card-table td.rv-card-full::before {
+        content: none;
+    }
+
+    .rv-card-table td[class*="oculto-mobile"] {
+        display: none !important;
+    }
+
+    .rv-card-table td[class*="so-mobile"],
+    .rv-card-table td.seg-periodo-mobile,
+    .rv-card-table td.un-so-mobile {
+        display: grid !important;
+    }
+
+    .rv-card-table td.rv-acao {
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 8px;
+        width: 100% !important;
+        margin-top: 4px;
+        padding-top: 10px !important;
+        border-bottom: 0 !important;
+        border-top: 1px solid #eceef6 !important;
+        text-align: left !important;
+    }
+
+    .rv-card-table td.rv-acao::before {
+        content: none !important;
+        display: none !important;
+    }
+
+    .rv-acoes-rotulo {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        color: #191970;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.35;
+        white-space: normal;
+    }
+
+    .rv-acoes-botoes {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .rv-card-table td.rv-acao a:has(img),
+    .rv-card-table td.rv-acao > img,
+    .rv-acoes-botoes > img {
+        display: inline-flex;
+        flex: 0 0 44px;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+        max-width: 44px;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #f3f5ff;
+        border: 1px solid #dfe3f5;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-size: 0;
+        line-height: 0;
+    }
+
+    .rv-card-table td.rv-acao a:not(:has(img)) {
+        display: inline-flex;
+        flex: 0 1 auto;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        margin: 0;
+        padding: 8px 12px;
+        overflow: visible;
+        border-radius: 12px;
+        background: #f3f5ff;
+        border: 1px solid #dfe3f5;
+        box-sizing: border-box;
+        color: #191970;
+        font-size: 14px;
+        line-height: 1.2;
+        text-decoration: none;
+        white-space: normal;
+    }
+
+    .rv-card-table td.rv-acao a img {
+        display: block;
+        width: 22px !important;
+        height: 22px !important;
+        max-width: 22px !important;
+        max-height: 22px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        object-fit: contain;
+        flex: none;
+    }
+
+    #conteudo .rv-card-table td.rv-acao > img,
+    #conteudo .rv-acoes-botoes > img {
+        display: block;
+        box-sizing: border-box !important;
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px;
+        min-height: 44px;
+        max-width: 44px !important;
+        max-height: 44px !important;
+        margin: 0 !important;
+        padding: 11px !important;
+        object-fit: contain;
+        flex: 0 0 44px;
+    }
+
+    .rv-card-table td.rv-acao-oculta {
+        display: none !important;
+    }
+
+    #conteudo input[type="text"],
+    #conteudo input[type="password"],
+    #conteudo input[type="email"],
+    #conteudo input[type="number"],
+    #conteudo input[type="date"],
+    #conteudo input[type="search"],
+    #conteudo input[type="tel"],
+    #conteudo select,
+    #conteudo textarea,
+    .cv-busca {
+        width: 100%;
+        max-width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid #d5d8ea;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    #conteudo input[type="submit"],
+    #conteudo input[type="button"],
+    #conteudo button,
+    .btn {
+        min-height: 46px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    #conteudo center input[type="submit"],
+    #conteudo center input[type="button"],
+    #conteudo center button {
+        width: 100%;
+        margin: 6px 0;
+    }
+
+    .rv-form,
+    .table-responsive > table[border="0"] {
+        width: 100% !important;
+        border: 0;
+    }
+
+    .rv-form tr,
+    .table-responsive > table[border="0"] tr {
+        display: block;
+        margin: 0 0 14px;
+    }
+
+    .rv-form th,
+    .rv-form td,
+    .table-responsive > table[border="0"] th,
+    .table-responsive > table[border="0"] td {
+        display: block;
+        width: 100% !important;
+        height: auto !important;
+        text-align: left !important;
+        padding: 0 !important;
+        font-weight: 400;
+        white-space: normal;
+    }
+
+    .rv-form th,
+    .table-responsive > table[border="0"] th {
+        margin: 0 0 6px;
+        color: #191970;
+        font-size: 13px !important;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .rv-form th:has(font),
+    .rv-form th:has(b),
+    .rv-form th:has(label),
+    .rv-form td:has(font),
+    .rv-form td:has(b),
+    .rv-form td:has(label) {
+        margin-bottom: 0;
+    }
+
+    .rv-form font,
+    .rv-form b,
+    .rv-form label,
+    .table-responsive > table[border="0"] font,
+    .table-responsive > table[border="0"] b,
+    .table-responsive > table[border="0"] label,
+    #cont form > label,
+    #cont form > b,
+    #cont form > font {
+        display: block;
+        margin: 0 0 6px;
+        padding: 0;
+        color: #191970;
+        font-size: 13px !important;
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: 0;
+        white-space: normal;
+        text-align: left;
+    }
+
+    .rv-form label:has(input[type="checkbox"]),
+    .rv-form label:has(input[type="radio"]),
+    #cont form label:has(input[type="checkbox"]),
+    #cont form label:has(input[type="radio"]) {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        min-height: 44px;
+        font-weight: 600;
+    }
+
+    .rv-form input[type="checkbox"],
+    .rv-form input[type="radio"],
+    #cont form input[type="checkbox"],
+    #cont form input[type="radio"] {
+        width: 22px;
+        height: 22px;
+        min-height: 22px;
+        margin: 1px 8px 0 0;
+        flex: 0 0 auto;
+        accent-color: #191970;
+    }
+
+    .rv-form input,
+    .rv-form select,
+    .rv-form textarea {
+        font-weight: 400;
+        margin-top: 0;
+    }
+
+    .ui-dialog {
+        max-width: calc(100vw - 16px) !important;
+        left: 8px !important;
+        width: calc(100vw - 16px) !important;
+    }
+
+    .gallery {
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .gallery img {
+        width: 300px;
+        max-width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .cv-card {
+        width: calc(50% - 16px);
+        max-width: 100%;
+    }
+
+    .cmp-card {
+        flex: 1 1 calc(50% - 10px);
+    }
+
+    .ui-dialog {
+        max-width: calc(100vw - 16px) !important;
+        left: 8px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    #cont {
+        margin: 8px;
+    }
+
+    .table-responsive > table[border="0"] {
+        width: 100% !important;
+    }
+
+    .table-responsive > table[border="0"] th,
+    .table-responsive > table[border="0"] td {
+        display: block;
+        width: 100% !important;
+        text-align: left;
+        box-sizing: border-box;
+    }
+
+    #conteudo input[type="text"],
+    #conteudo input[type="password"],
+    #conteudo input[type="email"],
+    #conteudo input[type="number"],
+    #conteudo input[type="date"],
+    #conteudo input[type="search"],
+    #conteudo input[type="tel"],
+    #conteudo input[type="file"],
+    #conteudo select,
+    #conteudo textarea,
+    .cv-busca,
+    .barra-ferramentas input[type="text"],
+    .cmp-toolbar input[type="text"],
+    .pf-premissa input[type="text"],
+    .pf-premissa select {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+    }
+
+    #conteudo input[type="submit"],
+    #conteudo input[type="button"],
+    #conteudo button,
+    .btn {
+        min-height: 44px;
+        margin: 4px 6px 4px 0;
+    }
+
+    .gallery {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .gallery img {
+        width: 300px;
+        max-width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .cv-card,
+    .cmp-card {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .cv-toolbar,
+    .cmp-toolbar,
+    .barra-ferramentas {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cmp-toolbar input[type="text"] {
+        min-width: 0;
+    }
+
+    .resumo-totais {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .pf-premissa label {
+        display: block;
+        min-width: 0;
+        margin-bottom: 4px;
+    }
+
+    .modal-content,
+    .modal-box,
+    .modal-caixa,
+    .cv-modal-box {
+        width: calc(100vw - 16px) !important;
+        max-width: calc(100vw - 16px) !important;
+        max-height: calc(100vh - 16px);
+        margin: 8px auto !important;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+
+    .modal,
+    .cv-modal {
+        overflow-y: auto;
+    }
+
+    .modal-footer {
+        text-align: center;
+    }
+
+    .cmp-paginacao a,
+    .cmp-paginacao span {
+        margin: 4px 2px;
+        min-width: 36px;
+        min-height: 36px;
+        line-height: 28px;
+    }
+
+    #reader {
+        width: 100% !important;
+        max-width: 260px;
+    }
+}
+
+@media (hover: none) and (min-width: 1025px) {
+    .submenu-toggle {
+        display: inline-block;
+        float: none;
+        position: static;
+        min-width: 32px;
+        min-height: 32px;
+        background: transparent;
+        color: #F5FFFA;
+        vertical-align: middle;
+    }
+
+    #menu li.submenu-aberto > ul {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    #cont {
+        margin: 6px;
+    }
+
+    #menu a,
+    #menu li ul a {
+        font-size: 15px;
+    }
+}
+
+/* O calendário do jQuery UI usa content-box. O box-sizing global quebra a grade e empilha os dias. */
+.ui-datepicker,
+.ui-datepicker * {
+    box-sizing: content-box;
+}
+
+.ui-datepicker {
+    width: 17em !important;
+    max-width: calc(100vw - 16px);
+    z-index: 2000 !important;
+}
+
+.ui-datepicker table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.ui-datepicker tr {
+    display: table-row !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+}
+
+.ui-datepicker th,
+.ui-datepicker td {
+    display: table-cell !important;
+    width: 14.28% !important;
+    height: auto !important;
+    float: none !important;
+    padding: 1px !important;
+    text-align: center !important;
+    border: 0 !important;
+    background: transparent;
+}
+
+.ui-datepicker td a,
+.ui-datepicker td span {
+    display: block;
+    padding: 0.45em 0;
+    text-align: center;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    line-height: 1.8em;
+}
+
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year {
+    width: 45% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 1px 2px !important;
+    padding: 2px !important;
+    display: inline-block !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+}
+
+@media (max-width: 768px) {
+    .ui-datepicker {
+        width: min(420px, calc(100vw - 24px)) !important;
+        max-width: calc(100vw - 24px) !important;
+        left: 12px !important;
+        right: auto !important;
+        box-sizing: border-box !important;
+        padding: 8px 8px 6px !important;
+        font-size: 16px;
+    }
+
+    .ui-datepicker .ui-datepicker-header {
+        padding: 4px 0 6px;
+        position: relative;
+    }
+
+    .ui-datepicker .ui-datepicker-prev,
+    .ui-datepicker .ui-datepicker-next {
+        width: 2.2em;
+        height: 2.2em;
+        top: 4px;
+    }
+
+    .ui-datepicker .ui-datepicker-title {
+        margin: 0 2.4em;
+        line-height: 2.2em;
+    }
+
+    .ui-datepicker select.ui-datepicker-month,
+    .ui-datepicker select.ui-datepicker-year {
+        width: 46% !important;
+        min-height: 32px !important;
+        margin: 2px 1% !important;
+        padding: 4px 2px !important;
+        font-size: 15px !important;
+        vertical-align: middle;
+    }
+
+    .ui-datepicker .ui-datepicker-calendar {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 6px 0 0 !important;
+        font-size: 15px;
+        table-layout: fixed !important;
+        border-collapse: collapse !important;
+        border-spacing: 0 !important;
+    }
+
+    .ui-datepicker .ui-datepicker-calendar thead,
+    .ui-datepicker .ui-datepicker-calendar tbody {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .ui-datepicker .ui-datepicker-calendar tr {
+        display: grid !important;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .ui-datepicker .ui-datepicker-calendar th,
+    .ui-datepicker .ui-datepicker-calendar td {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: auto !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        text-align: center !important;
+        float: none !important;
+    }
+
+    .ui-datepicker .ui-datepicker-calendar th {
+        padding: 8px 0 !important;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .ui-datepicker td a,
+    .ui-datepicker td span {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        min-height: 40px;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: center !important;
+        line-height: 1 !important;
+    }
+
+    .ui-datepicker .ui-datepicker-buttonpane {
+        margin: 6px 0 0;
+        padding: 0;
+    }
+
+    .ui-datepicker .ui-datepicker-buttonpane button {
+        width: auto !important;
+        min-height: 40px;
+        margin: 4px 2px;
+        padding: 6px 14px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 1024px) {
+    #conteudo img,
+    #cont img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .gallery {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .gallery {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .gallery img {
+        flex: 1 1 240px;
+        width: 100% !important;
+        max-width: 300px !important;
+        min-width: 0;
+        height: 200px !important;
+        object-fit: cover !important;
+    }
+
+    #conteudo table img[width="20"],
+    #conteudo table img[height="20"],
+    #conteudo table img[width="16"],
+    #conteudo table img[height="16"],
+    #conteudo table img[width="24"],
+    #conteudo table img[height="24"],
+    .rv-card-table td.rv-acao a img {
+        width: 22px !important;
+        height: 22px !important;
+        max-width: 22px !important;
+        max-height: 22px !important;
+        padding: 0 !important;
+        object-fit: contain;
+    }
+
+    #logo img {
+        width: auto !important;
+        height: auto !important;
+        max-width: min(300px, 100%) !important;
+        max-height: none !important;
+        margin: 0 auto !important;
+    }
+
+    .estiloTabelas table {
+        min-width: 0 !important;
+    }
+
+    #conteudo table[border="0"] td:has(input[maxlength="10"]),
+    .rv-form td:has(input[maxlength="10"]) {
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    #conteudo table[border="0"] td:has(input[maxlength="10"]) font,
+    #conteudo table[border="0"] td:has(input[maxlength="10"]) b,
+    .rv-form td:has(input[maxlength="10"]) font,
+    .rv-form td:has(input[maxlength="10"]) b {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 8px 0 0 !important;
+        flex: none;
+    }
+
+    #conteudo table[border="0"] td:has(input[maxlength="10"]) input[type="text"],
+    .rv-form td:has(input[maxlength="10"]) input[type="text"] {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0;
+        min-height: 44px;
+        flex: none;
+        box-sizing: border-box;
+    }
+}

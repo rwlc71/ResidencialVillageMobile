@@ -1,0 +1,1 @@
+<?phpswitch ($_GET['p']) {    case 'trocarsenha':        include "trocarsenha.php";        break;    case 'login':        include "autentica.php";        break;    case 'dadoscadastrais':        include "proprietarios.php";        break;    default:        include "home.php";        break;}?>
