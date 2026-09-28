@@ -390,6 +390,12 @@ switch ($ln['etapa']) {
         <br>
         <div class="estiloTabelas table-responsive">
             <h3>Hóspedes da reserva</h3>
+            <?php
+            $sql = "SELECT * from hospede where  id_locacao = '{$id_locacao}'";
+            $filtro = mysql_query($sql);
+            $num_rows = $filtro ? mysql_num_rows($filtro) : 0;
+            if ($num_rows > 0) {
+            ?>
             <table  border="2">
                 <tr>
                     <td width="20%" align="center" bgcolor="#191970"><font size="2"; color="#F5FFFA"><b> Nome</b></td>
@@ -397,9 +403,6 @@ switch ($ln['etapa']) {
                     <td width="10%" align="center" bgcolor="#191970"><font size="2"; color="#F5FFFA"><b> Grau de parentesco / vínculo:</b></td>
                 </tr>
                 <?php
-                $sql = "SELECT * from hospede where  id_locacao = '{$id_locacao}'";
-                $filtro = mysql_query($sql);
-                $num_rows = mysql_num_rows($filtro);
                 while ($ln = mysql_fetch_array($filtro)) {
                     ?>
                     <tr>
@@ -408,9 +411,12 @@ switch ($ln['etapa']) {
                         <td align="left"><font size="2"; color="#000000"><?= strtoupper($ln['parentesco_hospede']) ?></td>
                     </tr>
                     <?php
-                } // Fecha Loop 
+                }
                 ?>
             </table>
+            <?php } else { ?>
+            <p style="margin:12px 4px 16px; line-height:1.4;">Nenhum hóspede cadastrado para esta reserva.</p>
+            <?php } ?>
             <br>
             <!--</table>--> 
             </body>
