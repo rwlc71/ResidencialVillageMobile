@@ -19,11 +19,13 @@ if ($inf == 't') {
     $_SESSION['senha'] = '';
     $_COOKIE['usuario'] = '';
     $_COOKIE['tipo_acesso'] = '';
+    $_COOKIE['conselho'] = '';
     
     setcookie("senha", "", time() - 3600, "/");
     setcookie("usuario", "", time() - 3600, "/");
     setcookie("nome_usuario", "", time() - 3600, "/");
     setcookie("tipo_acesso", "", time() - 3600, "/");
+    setcookie("conselho", "", time() - 3600, "/");
     header("Location: autentica.php");
     RETURN DIE;
 }
@@ -63,14 +65,18 @@ if ($_POST['botao'] != "Autenticar") {
                     $lgpd = $lnome['lgpd'];
 //                    $lgpd = 1;
                     if ($lgpd == 1) {
+
                         $expire_time = time() + (60 * 180);
                         $nome = strtoupper($lnome['nome']);
                         $_SESSION['nome_usuario'] = $nome;
                         $_SESSION['tipo_acesso'] = $ln['tipo_acesso'];
                         $_SESSION['usuario'] = $ln['usuario'];
+                        $_SESSION['conselho'] = $ln['conselho'];
+
                         setcookie("usuario", $ln['usuario'], $expire_time, "/");
                         setcookie("nome_usuario", $nome, $expire_time, "/");
                         setcookie("tipo_acesso", $ln['tipo_acesso'], $expire_time, "/");
+                        setcookie("conselho", $ln['conselho'], $expire_time, "/");
 
                         date_default_timezone_set('America/Bahia');
                         $datahoje = date('d/m/Y');
@@ -83,7 +89,9 @@ if ($_POST['botao'] != "Autenticar") {
 							VALUES ('$datahoje', '$horalogin', $proprietario, '$nome', '$ip', '$host')
 						";
 						mysql_query($sqlAcesso);
-						
+echo(var_dump($ln));
+
+exit();
                         echo "<meta http-equiv='refresh' content='0; URL=proprietarios.php'>
                             <script type=\"text/javascript\">
                             alert(\"Seja bem vindo Sr(a): $nome!\");

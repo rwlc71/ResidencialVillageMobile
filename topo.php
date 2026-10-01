@@ -6,6 +6,12 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 if ($usuario == '') {
     $usuario = $_COOKIE['usuario'];
 }
+
+//echo($usuario);
+//echo(var_dump($_COOKIE));
+
+//exit();
+
 $menu_master = '';
 //echo('Usuario:' . $_COOKIE['usuario']);
 if ($_COOKIE['tipo_acesso'] == 'master') {
@@ -68,16 +74,25 @@ $menu_parceria = '<li><a href="convenios.php">Parcerias e Convênios</a>'
         . ' </li>';
 if (($_COOKIE['usuario'])) {
     if ($_COOKIE['tipo_acesso'] !== 'sup') {
+       
+
         if ($_COOKIE['tipo_acesso'] === 'adm') {
             $menu_seguranca = '';
             $menu_cadastro = '';
             $menu_master = '';
         }
         if ($_COOKIE['tipo_acesso'] === 'con') {
-            $menu_administrativo = '';
             $menu_seguranca = '';
-            $menu_relatorios = '';
             $menu_master = '';
+        
+            // O menu Cadastro é liberado somente para conselheiros.
+            $conselho = isset($_COOKIE['conselho']) ? trim(strtolower($_COOKIE['conselho'])) : '';
+
+            if ($conselho !== 'sim') {
+                $menu_cadastro = '';
+                $menu_relatorios = '';
+                $menu_administrativo = '';
+            }
         }
         if ($_COOKIE['tipo_acesso'] === 'seg') {
             $menu_administrativo = '';
