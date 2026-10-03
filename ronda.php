@@ -96,6 +96,7 @@
 session_name('SESSAO_PHP');
 include "topo.php";
 include "conexao.php";
+include "funcoes_analise_rondas.php";
 include "valida/verifica_acessoAdm.php";
 include "valida/verifica_autenticacao.php";
 include "valida/mascaras.php";
@@ -108,6 +109,24 @@ $dt_hoje = date('Y-m-d', strtotime(str_replace('/', '-', $dtHoje))); // Converte
         <body>
             <p>
             <h2>Relatório de Inspeção de Segurança</h2><br>
+            <?php
+            $rvColab = isset($_POST['colaborador']) ? $_POST['colaborador'] : '';
+            $rvData = isset($_POST['dt_entrada']) ? $_POST['dt_entrada'] : '';
+            if (rv_analise_rondas_tem($rvColab, $rvData)) {
+                $rvQs = array();
+                if (trim($rvColab) !== '') {
+                    $rvQs['colaborador'] = $rvColab;
+                }
+                if (trim($rvData) !== '') {
+                    $rvQs['dt_entrada'] = $rvData;
+                }
+                $rvUrl = 'analise_rondas.php';
+                if (count($rvQs)) {
+                    $rvUrl .= '?' . http_build_query($rvQs);
+                }
+                echo '<font size="2"><b>Atenção: existem verificações neste período que necessitam de avaliação do responsável. <a href="' . htmlspecialchars($rvUrl, ENT_QUOTES, 'UTF-8') . '">Consultar análise</a></b></font><br>';
+            }
+            ?>
             <font size="2">
             <b>Atenção</b>: na consulta livre serão listados apenas os registros dos ultimos 7 dias.<p>
                 </font>

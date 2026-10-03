@@ -89,7 +89,6 @@ if (($_COOKIE['usuario'])) {
             $conselho = isset($_COOKIE['conselho']) ? trim(strtolower($_COOKIE['conselho'])) : '';
 
             if ($conselho !== 'sim') {
-                $menu_cadastro = '';
                 $menu_relatorios = '';
                 $menu_administrativo = '';
             }
